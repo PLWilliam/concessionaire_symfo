@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ConcessionnaireController!{% endblock %}
+
+{% block body %}
+<ul>
+{% for concession in concessions %}
+<li>
+    {{concession.nom}}
+    {{concession.rue}}
+    {{concession.ville}}
+    {{concession.codePostal}}
+    <ul>
+    {% for index,vehicule in concession.listeVehicule %}
+    VOITURE {{index+1}} :
+    <li>
+        MARQUE : {{vehicule.marque}} 
+        GAMME : {{vehicule.gamme}} 
+        NBR PLACE : {{vehicule.nbrPlace}} 
+        COMPOSANT :
+        <ul>
+        {% for idx,composant in vehicule.composant %}
+        <li>
+            compo {{idx+1}} :
+            {{composant.nom}}
+            {{composant.denomination}}
+            {{composant.codeBarre}}
+        </li>
+        {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+    </ul>
+</li>
+{% endfor %}
+</ul>
+
+
+{# <ul>
+{% for vehicule in vehicules %}
+<li>
+    MARQUE : {{vehicule.marque}} 
+    GAMME : {{vehicule.gamme}}
+    <ul>
+    {% for idx,composant in vehicule.composant %}
+    <li>
+        compo {{idx+1}} :
+        {{composant.nom}}
+        {{composant.denomination}}
+        {{composant.codeBarre}}
+    </li>
+    {% endfor %}
+    </ul>
+</li>
+{% endfor %}
+</ul> #}
+
+<ul>
+{% for concession in concessionsORM %}
+<li>
+    {{concession.nom}}
+    {{concession.rue}}
+    {{concession.ville}}
+    {{concession.codePostal}}
+    <ul>
+    {% for vehicule in concession.vehiculeId %}
+    <li>
+        MARQUE : {{vehicule.marque}} 
+        GAMME : {{vehicule.gamme}} 
+        NBR PLACE : {{vehicule.nbrPlace}} 
+        COMPOSANT :
+        <ul>
+        {% for idx,composant in vehicule.composant %}
+        <li>
+            compo {{idx+1}} :
+            {{composant.nom}}
+            {{composant.denomination}}
+            {{composant.codeBarre}}
+        </li>
+        {% endfor %}
+        </ul>
+    </li>
+    {% endfor %}
+    </ul>
+</li>
+{% endfor %}
+</ul>
+
+
+
+{% endblock %}
